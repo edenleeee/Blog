@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Editor } from "slate-react";
 import { Value } from "slate";
-import BoldMark from './BoldMark';
+import {BoldMark, ItalicMark} from './index';
  
 
 const initialValue = Value.fromJSON({
@@ -45,6 +45,11 @@ class TextEditor extends React.Component {
         change.toggleMark('bold');
         return true
       }
+
+      case'i' : {
+        change.toggleMark('italic');
+        return true;
+      }
     }
   }
 
@@ -52,6 +57,8 @@ class TextEditor extends React.Component {
     switch(props.mark.type) {
       case 'bold': 
        return <BoldMark {...props}/>
+      case 'italic':
+        return <ItalicMark {...props }/>
     }
   }
 
