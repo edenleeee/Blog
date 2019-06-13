@@ -4,6 +4,7 @@ import "./App.css";
 import "antd/dist/antd.css";
 import { DatePicker, message } from "antd";
 import { Layout, Menu, Breadcrumb, Icon, Input } from "antd";
+import { TextEditor } from './component';
 
 
 const { SubMenu } = Menu;
@@ -61,7 +62,9 @@ function App() {
     <Layout style={{ marginLeft: 200 }}>
       <Header style={{ background: '#fff', padding: 0 }} />
       <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-      <TextArea rows={10} />
+      {/* <TextArea rows={10}> */}
+        <TextEditor/>
+      {/* </TextArea> */}
       </Content>
       <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
     </Layout>
