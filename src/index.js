@@ -5,10 +5,15 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Menu, Icon } from "antd";
+import { Provider as ReduxProvider } from "react-redux";
+import configureStore from "./modules/store";
 
 const { SubMenu } = Menu;
+const reduxStore = configureStore(window.REDUX_INITIAL_DATA);
+
 
 let TotalApp = (
+  <ReduxProvider store={reduxStore}>
   <Router>
     <Menu mode="horizontal">
       <Menu.Item href="/" key="mail">
@@ -28,6 +33,7 @@ let TotalApp = (
     {/* <Route path="/about" component={About} />
         <Route path="/topics" component={Topics} /> */}
   </Router>
+  </ReduxProvider>
 );
 
 ReactDOM.render(TotalApp, document.getElementById("root"));
