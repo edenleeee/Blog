@@ -4,24 +4,44 @@ import "antd/dist/antd.css";
 import { Layout, Menu, Breadcrumb, Icon, Input, Button, Row, Col } from "antd";
 import { TextEditor } from "./component";
 
-
-
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 const { TextArea } = Input;
 
-
-
 class App extends React.Component {
-
+  printChange(content) {
+    console.log(content);
+  }
   render() {
     return (
       <Layout>
         <Header style={{ background: "#fff", padding: 0 }} />
         <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
-          {/* <TextArea rows={10}> */}
-          <TextEditor onSubmit={this.printOut} onRef={ref => (this.child = ref)} />
-          {/* </TextArea> */}
+          <Row>
+            <Col span={4} offset={1}>
+              <h3>Title</h3>
+              <TextArea rows={1} />
+            </Col>
+          </Row>
+          <Row>
+            <Col span={4} offset={1}>
+              <h3>Author</h3>
+              <TextArea rows={1} />
+            </Col>
+          </Row>
+          <Row>
+            <Col span={4} offset={1}>
+              <h3>Write Your Content Below</h3>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={22} offset={1}>
+              <TextEditor
+                onChange= {this.printChange}
+                onRef={ref => (this.child = ref)}
+              />
+            </Col>
+          </Row>
         </Content>
         <Row>
           <Col span={8} offset={11}>
@@ -30,13 +50,11 @@ class App extends React.Component {
             </Button>
           </Col>
         </Row>
-  
+
         <Footer style={{ textAlign: "center" }}>Make with 💜 by Eden</Footer>
       </Layout>
-    )
+    );
   }
 }
-
-
 
 export default App;

@@ -78,6 +78,7 @@ class TextEditor extends React.Component {
 
   onChange = ({ value }) => {
     this.setState({ value })
+    this.props.onChange(value);
   }
 
   render() {
