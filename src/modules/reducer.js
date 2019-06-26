@@ -8,7 +8,6 @@ const defaultState = {
 const postReducer = (state = defaultState, action) => {
   switch (action.type) {
     case ACTIONS.Types.CREATE_POST: {
-      console.log(action);
 
       let post = action.payload;
       let newState = _.cloneDeep(state);

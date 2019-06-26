@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { Editor } from "slate-react";
 import { Value } from "slate";
 import { BoldMark, ItalicMark } from "./index";
-import Post from "../model/Post";
-import ACTIONS from "../modules/action";
-import { connect } from "react-redux";
 
 const initialValue = Value.fromJSON({
   document: {
@@ -52,13 +49,10 @@ class TextEditor extends React.Component {
         return true;
       }
 
-      case "Enter": {
-        const post = new Post("Eden", "Eden", this.state.value);
-        this.props.createPost(post);
-        console.log(this.props.post);
-        return;
+      case "Enter" : {
+        this.props.onSavePost(this.state.value);
+        return ;
       }
-
         
       default :
         return;
@@ -78,7 +72,6 @@ class TextEditor extends React.Component {
 
   onChange = ({ value }) => {
     this.setState({ value })
-    this.props.onChange(value);
   }
 
   render() {
@@ -95,17 +88,6 @@ class TextEditor extends React.Component {
   }
 }
 
-
-    const mapStateToProps = state => ({
-      post: state
-    });
-
-    const mapDispatchToProps = dispatch => ({
-      createPost: post => dispatch(ACTIONS.createPost(post))
-    });
   
   
-export default connect(
-    mapStateToProps,
-mapDispatchToProps)
-    (TextEditor)
+export default TextEditor

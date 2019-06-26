@@ -3,15 +3,20 @@ import "./App.css";
 import "antd/dist/antd.css";
 import { Layout, Menu, Breadcrumb, Icon, Input, Button, Row, Col } from "antd";
 import { TextEditor } from "./component";
+import Post from "./model/Post";
+import ACTIONS from "./modules/action";
+import { connect } from "react-redux";
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 const { TextArea } = Input;
 
 class App extends React.Component {
-  printChange(content) {
-    console.log(content);
+  constructor(props) {
+    super(props);
   }
+
+ 
   render() {
     return (
       <Layout>
@@ -37,8 +42,12 @@ class App extends React.Component {
           <Row>
             <Col span={22} offset={1}>
               <TextEditor
-                onChange= {this.printChange}
-                onRef={ref => (this.child = ref)}
+                onSavePost={(content) => { const post = new Post("Eden", "Eden", content);
+    this.props.createPost(post);
+    console.log(this.props.post);
+    return;
+
+                }}
               />
             </Col>
           </Row>
@@ -57,4 +66,15 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  post: state
+});
+
+const mapDispatchToProps = dispatch => ({
+  createPost: post => dispatch(ACTIONS.createPost(post))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
