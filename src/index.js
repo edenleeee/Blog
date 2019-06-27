@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import CreatePost from "./CreatePost";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Menu, Icon } from "antd";
 import { Provider as ReduxProvider } from "react-redux";
 import configureStore from "./modules/store";
+
 
 const { SubMenu } = Menu;
 const reduxStore = configureStore(window.REDUX_INITIAL_DATA);
@@ -29,7 +30,7 @@ let TotalApp = (
       </Menu.Item>
     </Menu>
 
-    <Route exact path="/" component={App} />
+    <Route exact path="/" component={CreatePost} />
     {/* <Route path="/about" component={About} />
         <Route path="/topics" component={Topics} /> */}
   </Router>

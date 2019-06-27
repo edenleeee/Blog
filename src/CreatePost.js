@@ -1,19 +1,27 @@
 import React from "react";
-import "./App.css";
 import "antd/dist/antd.css";
 import { Layout, Menu, Breadcrumb, Icon, Input, Button, Row, Col } from "antd";
 import { TextEditor } from "./component";
 import Post from "./model/Post";
 import ACTIONS from "./modules/action";
 import { connect } from "react-redux";
+import { Value } from "slate";
+
 
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 const { TextArea } = Input;
 
-class App extends React.Component {
+class CreatePost extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { Title: "", Author: "", Content: ""};
+  }
+
+  createPost() {
+    let post = new Post(this.state.Title,this.state.Author,this.state.Content.toJSON())
+    console.log(post)
+    this.props.createPost(post)
   }
 
  
@@ -25,13 +33,13 @@ class App extends React.Component {
           <Row>
             <Col span={4} offset={1}>
               <h3>Title</h3>
-              <TextArea rows={1} />
+              <TextArea rows={1} onChange={(data) => this.setState({Title: data.target.value})} />
             </Col>
           </Row>
           <Row>
             <Col span={4} offset={1}>
               <h3>Author</h3>
-              <TextArea rows={1} />
+              <TextArea rows={1} onChange={(data) => this.setState({Author: data.target.value})} />
             </Col>
           </Row>
           <Row>
@@ -42,19 +50,16 @@ class App extends React.Component {
           <Row>
             <Col span={22} offset={1}>
               <TextEditor
-                onSavePost={(content) => { const post = new Post("Eden", "Eden", content);
-    this.props.createPost(post);
-    console.log(this.props.post);
-    return;
-
-                }}
+                onSavePost={(content) => this.setState({Content: content})}
               />
             </Col>
           </Row>
         </Content>
         <Row>
           <Col span={8} offset={11}>
-            <Button type="primary" shape="round" icon="check" size="large">
+            <Button type="primary" shape="round" icon="check" size="large" onClick= {() => {
+             this.createPost()
+            }} >
               Upload
             </Button>
           </Col>
@@ -77,4 +82,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(CreatePost);
