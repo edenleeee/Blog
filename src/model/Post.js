@@ -3,6 +3,6 @@ export default class Post {
     this.postName = postName;
     this.postAuthor = postAuthor;
     this.postContent = postContent;
-    this.postTime = new Date();
+    this.postTime = new Date().getTime();
   }
 }
